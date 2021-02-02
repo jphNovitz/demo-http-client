@@ -4,6 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    screen_name: '%env(SCREEN_NAME)%'
+    count: '%env(COUNT)%'
+    bearer: '%env(BEARER)%'
+    email_to: '%env(CONTACT_TO_EMAIL)%'
 
 services:
     # default configuration for services in *this* file

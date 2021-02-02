@@ -1,0 +1,14 @@
+<div class="footer_tweet">
+    {% if tweets is not null %}
+        <ul>
+            {% for tweet in tweets %}
+                <li>
+                    <a href="https://twitter.com/jphNovitz" target="_blank">@jphNovitz </a>, le <a href="{{ tweet.link }}" target="_blank"> {{ tweet.date }}</a>
+                    <br />{{ tweet.text|nl2br }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Probleme de réseau, aucun tweet à afficher</p>
+    {% endif %}
+</div>
