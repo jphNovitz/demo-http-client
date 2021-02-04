@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.tweeter{
+    background-color: #000000;
+    color: #cecece;
+}
+
+.tweeter .title{
+    background-color: #81B600;
+    color: #ffffff;
+    margin-top: 0;
+    padding: .8rem;
+    text-transform: uppercase;
+}
+.tweeter .title .link{
+    font-size: .85rem;
+    text-transform: none;
+}
+
+.tweeter .tweet{
+    padding: .5rem;
+    margin: .18rem auto;
+    transition: font-weight 2s;
+}
+.tweeter .tweet:hover{
+    border-bottom: solid 1px #81B600;
+}
+
+.tweeter .tweet img{
+    width: 100px;
+}

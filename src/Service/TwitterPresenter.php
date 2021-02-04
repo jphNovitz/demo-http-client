@@ -24,6 +24,7 @@ class TwitterPresenter implements TwitterPresenterInterface
 
         $tweets = [];
         $raw_tweets = json_decode($content);
+        dd($raw_tweets);
         foreach ($raw_tweets as $raw_tweet) {
             $tweet['date'] = date('d/m/y', strtotime($raw_tweet->created_at));
             $new_text = '';
@@ -44,9 +45,15 @@ class TwitterPresenter implements TwitterPresenterInterface
             foreach ($raw_tweet->entities->hashtags as $tag):
                 array_push($tweet['hashtags'], $tag->text);
             endforeach;
+
+            if (isset($raw_tweet->entities->media)) {
+                $tweet['image'] = $raw_tweet->entities->media[0]->media_url;
+            }  else $tweet['image'] = null;
+
             array_push($tweets, $tweet);
 
         }
+//        dd($tweets);
         return $tweets;
     }
 

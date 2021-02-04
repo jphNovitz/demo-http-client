@@ -1,14 +1,30 @@
-<div class="footer_tweet">
-    {% if tweets is not null %}
-        <ul>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <article class="tweeter">
+        {% if tweets is not null %}
+            <h2 class="title">Derniers tweets
+                <span class="link">
+                    [<a href="https://twitter.com/jphNovitz" target="_blank">@jphNovitz </a>]
+                </span>
+            </h2>
             {% for tweet in tweets %}
-                <li>
-                    <a href="https://twitter.com/jphNovitz" target="_blank">@jphNovitz </a>, le <a href="{{ tweet.link }}" target="_blank"> {{ tweet.date }}</a>
-                    <br />{{ tweet.text|nl2br }}
-                </li>
+                <div class="tweet">
+                    <p>
+                        {% if tweet.image is defined and tweet.image is not empty %}
+                            <img src="{{ tweet.image }}" alt="jphNovitz image tweeter"/> <br />
+                        {% endif %}
+                        {{ tweet.text|nl2br }}
+                        <br/>
+                        <a href="{{ tweet.link }}"
+                           target="_blank">
+                            {{ tweet.date }}
+                        </a>
+                    </p>
+                </div>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>Probleme de réseau, aucun tweet à afficher</p>
-    {% endif %}
-</div>
+        {% else %}
+            <p>Probleme de réseau, aucun tweet à afficher</p>
+        {% endif %}
+    </article>
+{% endblock %}
