@@ -24,7 +24,7 @@ class TwitterPresenter implements TwitterPresenterInterface
 
         $tweets = [];
         $raw_tweets = json_decode($content);
-        dd($raw_tweets);
+        //dd($raw_tweets);
         foreach ($raw_tweets as $raw_tweet) {
             $tweet['date'] = date('d/m/y', strtotime($raw_tweet->created_at));
             $new_text = '';

@@ -6,6 +6,7 @@
 .tweeter{
     background-color: #000000;
     color: #cecece;
+    width: 20rem;
 }
 
 .tweeter .title{
@@ -22,13 +23,37 @@
 
 .tweeter .tweet{
     padding: .5rem;
-    margin: .18rem auto;
-    transition: font-weight 2s;
+    margin-bottom: .18rem;
+    transition: font-weight .5s;
 }
 .tweeter .tweet:hover{
     border-bottom: solid 1px #81B600;
 }
 
+
+.tweeter .tweet .content{
+    display: flex;
+    flex-direction: row;
+}
 .tweeter .tweet img{
     width: 100px;
+}
+.tweeter .tweet .text,
+.tweeter .tweet .hashtags{
+    padding: 2px 15px;
+}
+
+.tweeter h2 .link a:link,
+.tweeter h2 .link a:hover,
+.tweeter h2 .link a:visited,
+.tweeter h2 .link a:active{
+    background-color: inherit;
+    color: #ffffff;
+}
+.tweet .link a:link,
+.tweet .link a:hover,
+.tweet .link a:visited,
+.tweet .link a:active{
+    background-color: inherit;
+    color: #81B600;
 }

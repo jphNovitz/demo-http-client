@@ -10,17 +10,29 @@
             </h2>
             {% for tweet in tweets %}
                 <div class="tweet">
-                    <p>
+                    <div class="content">
                         {% if tweet.image is defined and tweet.image is not empty %}
-                            <img src="{{ tweet.image }}" alt="jphNovitz image tweeter"/> <br />
+                            <div class="caption">
+                                <img src="{{ tweet.image }}" alt="jphNovitz image tweeter"/> <br/>
+                            </div>
                         {% endif %}
-                        {{ tweet.text|nl2br }}
-                        <br/>
+                        <div class="text">
+                            {{ tweet.text|nl2br }}
+                        </div>
+                    </div>
+                    {% if tweet.hashtags is defined and tweet.hashtags is not empty %}
+                        <div class="hashtags">
+                            {% for tag in tweet.hashtags %}
+                                #{{ tag }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="link">
                         <a href="{{ tweet.link }}"
                            target="_blank">
-                            {{ tweet.date }}
+                           Le {{ tweet.date }}
                         </a>
-                    </p>
+                    </div>
                 </div>
             {% endfor %}
         {% else %}
