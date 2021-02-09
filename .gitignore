@@ -1,0 +1,26 @@
+###> symfony/framework-bundle ###
+Symfony/.env.local
+Symfony/.env.local.php
+Symfony/.env.*.local
+Symfony/config/secrets/prod/prod.decrypt.private.php
+Symfony/public/bundles/
+Symfony/var/
+Symfony/vendor/
+###< symfony/framework-bundle ###
+
+###> Laravel ###
+Laravel/node_modules
+Laravel/public/hot
+Laravel/public/storage
+Laravel/storage/*.key
+Laravel/vendor
+Laravel/.env
+Laravel/.env.backup
+Laravel/.phpunit.result.cache
+Laravel/docker-compose.override.yml
+Laravel/Homestead.json
+Laravel/Homestead.yaml
+Laravel/npm-debug.log
+Laravel/yarn-error.log
+###< Laravel ###
+
