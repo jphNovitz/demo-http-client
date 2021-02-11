@@ -24,3 +24,6 @@ Laravel/npm-debug.log
 Laravel/yarn-error.log
 ###< Laravel ###
 
+Php/vendor
+Php/env.json
+
