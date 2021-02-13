@@ -1,7 +1,7 @@
-#Welcome to "http client demo"
+# Welcome to "http client demo"
 ______________________________
 
-##Languages
+## Languages
 ___________
 
 The language used was PHP, three versions:
@@ -10,7 +10,7 @@ The language used was PHP, three versions:
 * Symfony 5.2 ;
 * Laravel 8.
 
-##About
+## About
 ______
 **[Http-client](https://github.com/symfony/http-client)** is a symfony component that fetch  HTTP resources synchronously or asynchronously. *This component can be used outside Symfony*.
     
@@ -20,7 +20,7 @@ last twitter posts and show them in my site footer. Http-Client is easy to use a
 
 I did three this exercice three times: Symfony, Laravel, PHP.  
 
-##The Exercice
+## The Exercice
 ______________
 
 I have a twitter account, I used the [Twitter API](https://developer.twitter.com/en/docs/twitter-api) to retrieve my last posts and show it in a simple page.
@@ -28,15 +28,15 @@ I have a twitter account, I used the [Twitter API](https://developer.twitter.com
 To connect your code to the Twitter API you need to get your Screen name and his Bearer Token to authentify yourself.  I used th count variable to specify the maximum (5) post to import.  
 
 
-##The basics
+## The basics
 ____________
 
-###Environnement file.
+### Environnement file.
 BEARER = *your bearer token*  
 SCREEN_NAME = *your screen name*  
 COUNT = *max twitter posts*  
 
-###Services and controllers  
+### Services and controllers  
 
 I used two services:
 * A getter: his mission is just take the env variable and use http-client component to fetch the twitter content. 
