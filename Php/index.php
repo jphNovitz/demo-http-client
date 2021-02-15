@@ -35,7 +35,7 @@ $tweets = $presenter->prepareDatas($twitterGetter->getDatas());
                 <div class="tweet">
                     <div class="content">
                         <?php if ($tweet['image'] != null) : ?>
-                
+
                             <div class="caption">
                                 <img src="<?php echo $tweet['image'] ?>" alt="jphNovitz image tweeter"/> <br/>
                             </div>

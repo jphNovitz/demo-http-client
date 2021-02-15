@@ -3,6 +3,8 @@
 namespace App;
 
 
+use App\Contract\TwitterPresenterIntercace;
+
 /**
  * Class TwitterPresenter
  *
@@ -10,7 +12,7 @@ namespace App;
  *
  * @author novitz Jean-Philiipe <novitz@gmail.com>
  */
-class TwitterPresenter
+class TwitterPresenter implements TwitterPresenterIntercace
 {
 
     public function prepareDatas($content)

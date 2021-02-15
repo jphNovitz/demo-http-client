@@ -7,6 +7,7 @@ The language used was PHP, three versions:
 * PHP Oriented object without framework ;
 * Symfony 5.2 ;
 * Laravel 8.
+* HTML5, CSS3
 
 ## About  
 **[Http-client](https://github.com/symfony/http-client)** is a symfony component that fetch  HTTP resources synchronously or asynchronously. *This component can be used outside Symfony*.
@@ -40,5 +41,10 @@ receive the needed data and display them.  The presenter get a big and complex a
   The presenter simplify the template code.  
     
 The controller is simple: he calls the getter, use the presenter and pass it to the view.
+
+Each time i used Interfaces for the contract and the abstraction layer.
+
+
+
 
 

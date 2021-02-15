@@ -2,11 +2,12 @@
 
 namespace App;
 
+use App\Contract\TwitterGetterIntercace;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\RetryableHttpClient;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-class TwitterGetter
+class TwitterGetter implements TwitterGetterIntercace
 {
     private $client;
     private $bearer;
