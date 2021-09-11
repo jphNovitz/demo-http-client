@@ -2,6 +2,9 @@
 
 namespace App\Service;
 
+use App\Exception\BadRequestException;
+use App\Exception\ForbiddenException;
+use App\Exception\NotFoundException;
 use App\Exception\UnauthorizedException;
 use App\Model\TwitterGetterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -50,6 +53,9 @@ class TwitterGetter implements TwitterGetterInterface
             );
 
             if ($response->getStatusCode() === 401) throw  new UnauthorizedException();
+            if ($response->getStatusCode() === 400) throw  new BadRequestException();
+            if ($response->getStatusCode() === 404) throw  new NotFoundException();
+            if ($response->getStatusCode() === 403) throw  new ForbiddenException();
             return $response->getContent();
         } catch (TransportExceptionInterface $exception) {
 
