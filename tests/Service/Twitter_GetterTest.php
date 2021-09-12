@@ -3,6 +3,7 @@
 namespace App\Tests\Service;
 
 use App\Exception\UnauthorizedException;
+use App\Exception\WrongDataTypeException;
 use App\Service\TwitterGetter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -35,13 +36,7 @@ class Twitter_GetterTest extends TestCase
             "bearer" => "bearer"
         ];
 
-//        $this->error_codes = [
-//            ["code" => "401", "type"=> "App\Exception\UnauthorizedException", "message" => "The request is unauthorized, please check your credentials"],
-//            ["code" => "400", "type"=> "App\Exception\UnauthorizedException", "message" => "Bad Request"],
-//        ];
-
     }
-
 
 
     /*
@@ -57,7 +52,7 @@ class Twitter_GetterTest extends TestCase
      * @throws \JsonException
      * @dataProvider errorDataProvider
      */
-    public function test_twitter_respond_with_a_401_error($code, $type, $message)
+    public function test_twitter_respond_with_a_request_error($code, $type, $message)
     {
 
             $expectedResponseData = ['id' => 12345];
@@ -72,8 +67,28 @@ class Twitter_GetterTest extends TestCase
             $service = new TwitterGetter($this->client, $this->params);
 
             $this->expectException($type);
-//            $this->expectException(UnauthorizedException::class);
             $this->expectExceptionMessage($message);
+
+            $response = $service->getDatas();
+
+    }
+
+    public function test_twitter_respond_with_a_200_but_response_is_not_json()
+    {
+
+            $responseData = "WRONG FORMAT DATA";
+//            $mockResponseJson = json_encode($expectedResponseData, JSON_THROW_ON_ERROR);
+
+            $mockResponse = new MockResponse($responseData, [
+                'http_code' => 200,
+                'response_headers' => ['Content-Type: application/json'],
+            ]);
+            $this->client = new MockHttpClient($mockResponse, 'https://example.com');
+
+            $service = new TwitterGetter($this->client, $this->params);
+
+            $this->expectException('App\Exception\WrongDataTypeException');
+            $this->expectExceptionMessage('The content is not a valid json');
 
             $response = $service->getDatas();
 
@@ -85,6 +100,8 @@ class Twitter_GetterTest extends TestCase
             ["code" => "400", "type"=> "App\Exception\BadRequestException", "message" => "Bad Request"],
             ["code" => "404", "type"=> "App\Exception\NotFoundException", "message" => "The Resource cannot be found"],
             ["code" => "403", "type"=> "App\Exception\ForbiddenException", "message" => "The request is forbidden"],
+            ["code" => "583", "type"=> "App\Exception\GeneralRequestException", "message" => "Undefined Exception"],
+            // 583 to test an error > 400 and < 600
         ];
     }
 }

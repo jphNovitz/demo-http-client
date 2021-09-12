@@ -4,8 +4,10 @@ namespace App\Service;
 
 use App\Exception\BadRequestException;
 use App\Exception\ForbiddenException;
+use App\Exception\GeneralRequestException;
 use App\Exception\NotFoundException;
 use App\Exception\UnauthorizedException;
+use App\Exception\WrongDataTypeException;
 use App\Model\TwitterGetterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -52,16 +54,44 @@ class TwitterGetter implements TwitterGetterInterface
                 ]]
             );
 
-            if ($response->getStatusCode() === 401) throw  new UnauthorizedException();
-            if ($response->getStatusCode() === 400) throw  new BadRequestException();
-            if ($response->getStatusCode() === 404) throw  new NotFoundException();
-            if ($response->getStatusCode() === 403) throw  new ForbiddenException();
-            return $response->getContent();
+            $this->validateRequestCode($response->getStatusCode());
+
+
+            json_decode($response->getContent());
+            if (json_last_error() === JSON_ERROR_NONE) return $response->getContent();
+            throw  new WrongDataTypeException();
         } catch (TransportExceptionInterface $exception) {
 
             throw  new \LogicException('Invalid Credentials');
 //            return false;
         }
+    }
+
+    /**
+     * @param $code
+     * @return bool
+     * @throws BadRequestException
+     * @throws ForbiddenException
+     * @throws GeneralRequestException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
+     */
+    public function validateRequestCode($code)
+    {
+        switch (true):
+            case $code === 400:
+                throw  new BadRequestException();
+            case $code === 401:
+                throw  new UnauthorizedException();
+            case $code === 403:
+                throw  new ForbiddenException();
+            case $code === 404:
+                throw  new NotFoundException();
+            case ($code > 400) && ($code < 600) :
+                throw  new GeneralRequestException();
+            default:
+                return true;
+        endswitch;
     }
 
 

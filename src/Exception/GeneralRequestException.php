@@ -2,9 +2,9 @@
 namespace App\Exception;
 
 
-class BadRequestException extends \Exception
+class GeneralRequestException extends \Exception
 {
 
-    protected $message = "Bad Request";
+    protected $message = "Undefined Exception";
 
 }

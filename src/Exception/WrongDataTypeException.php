@@ -2,9 +2,9 @@
 namespace App\Exception;
 
 
-class BadRequestException extends \Exception
+class WrongDataTypeException extends \Exception
 {
 
-    protected $message = "Bad Request";
+    protected $message = "The content is not a valid json";
 
 }
