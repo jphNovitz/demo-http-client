@@ -33,8 +33,9 @@ class TwitterGetter implements TwitterGetterInterface
     private $screenName;
     private $count;
 
-    public function __construct(HttpClientInterface $client, array $params)
+    public function __construct(HttpClientInterface $client, array $params=null)
     {
+        if (null==$params) throw new \InvalidArgumentException('$params cannot be null or empty');
         $this->client = $client;
         $this->screenName = $params['screenName'];
         $this->count = $params['count'];
@@ -63,7 +64,6 @@ class TwitterGetter implements TwitterGetterInterface
         } catch (TransportExceptionInterface $exception) {
 
             throw  new \LogicException('Invalid Credentials');
-//            return false;
         }
     }
 
