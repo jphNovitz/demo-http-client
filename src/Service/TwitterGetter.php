@@ -10,6 +10,7 @@ use App\Exception\UnauthorizedException;
 use App\Exception\WrongDataTypeException;
 use App\Model\TwitterGetterInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -28,15 +29,17 @@ use function PHPUnit\Framework\throwException;
 class TwitterGetter implements TwitterGetterInterface
 {
 
-    private $client;
-    private $bearer;
-    private $screenName;
-    private $count;
+    protected $client;
+    protected $bearer;
+    protected $screenName;
+    protected $count;
 
-    public function __construct(HttpClientInterface $client, array $params=null)
+    public function __construct(array $params = null)
     {
-        if (null==$params) throw new \InvalidArgumentException('$params cannot be null or empty');
-        $this->client = $client;
+
+        if (null === $params) throw new \InvalidArgumentException('$params cannot be null or empty');
+
+        $this->client =  HttpClient::create();
         $this->screenName = $params['screenName'];
         $this->count = $params['count'];
         $this->bearer = $params['bearer'];
@@ -46,6 +49,7 @@ class TwitterGetter implements TwitterGetterInterface
     {
 
         try {
+
             $response = $this->client->request(
                 'GET',
                 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $this->screenName . '&count=' . $this->count,
