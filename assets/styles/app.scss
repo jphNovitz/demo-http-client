@@ -1,0 +1,69 @@
+@import '_partials/font';
+@import '_partials/colors';
+@import '_partials/header';
+@import '_partials/footer';
+
+html, body, p{
+  font-family: 'Open Sans', sans-serif;
+  padding: .75rem;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+.tweeter{
+  width: 23rem;
+}
+
+.tweeter .title{
+  border: solid 1px $white;
+  border-radius: 8px;
+  margin-top: 0;
+  padding: .8rem;
+  text-transform: uppercase;
+}
+.tweeter .title .link{
+  font-size: .85rem;
+  text-transform: none;
+}
+
+.tweeter .tweet{
+  border-radius: 8px;
+  padding: .5rem;
+  margin-bottom: .18rem;
+  transition: font-weight .5s;
+}
+.tweeter .tweet:hover{
+  border-bottom: solid 1px $white;
+}
+
+.tweeter .tweet .content{
+  display: flex;
+  flex-direction: row;
+}
+
+.tweeter .tweet img{
+  width: 100px;
+}
+
+.tweeter .tweet .text,
+.tweeter .tweet .hashtags{
+  padding: 2px 15px;
+}
+
+.tweeter h2 .link a:link,
+.tweeter h2 .link a:hover,
+.tweeter h2 .link a:visited,
+.tweeter h2 .link a:active{
+  background-color: inherit;
+  color: $white;
+}
+.tweet .link a:link,
+.tweet .link a:hover,
+.tweet .link a:visited,
+.tweet .link a:active{
+  background-color: inherit;
+  color: $secondary;
+}

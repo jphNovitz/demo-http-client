@@ -1,0 +1,15 @@
+$black: #000000;
+$black-light: #272727;
+$white: #FFFFFF;
+
+$primary: #81B600;
+$secondary: #F2F2F2;
+
+.bg-black{
+ background-color: $black;
+  color: $secondary
+}
+.bg-black-light{
+ background-color: $black-light;
+  color: $secondary
+}
