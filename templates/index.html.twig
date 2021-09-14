@@ -5,11 +5,11 @@
         {% if tweets is not null %}
             <h2 class="title">Derniers tweets
                 <span class="link">
-                    [<a href="https://twitter.com/jphNovitz" target="_blank">@jphNovitz </a>]
+                     <a href="https://twitter.com/jphNovitz" target="_blank">@jphNovitz </a>
                 </span>
             </h2>
             {% for tweet in tweets %}
-                <div class="tweet">
+                <div class="tweet bg-black-light">
                     <div class="content">
                         {% if tweet.image is defined and tweet.image is not empty %}
                             <div class="caption">

@@ -1,0 +1,27 @@
+footer{
+  display: flex;
+  flex-direction: column;
+}
+footer article {
+  width: 50%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+footer article h3{
+  margin-top: .75rem;
+  margin-bottom: .75rem;
+}
+footer article h3 a:link,
+footer article h3 a:hover,
+footer article h3 a:visited,
+footer article h3 a:active{
+  color: $secondary;
+}
+
+footer h5{
+  text-align: center;
+  margin-top: 5rem;
+}
