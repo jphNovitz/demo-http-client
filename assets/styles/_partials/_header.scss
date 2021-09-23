@@ -1,24 +1,48 @@
-header, header h1{
+header, header h1 {
   align-items: center;
 }
-header{
+
+header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-header h1{
-  font-size: 1.9rem;
-}
-header h2{
-  margin-top: 0;
-  font-size: 1.750rem;
+
+header h1 {
+  font-size: 1.25rem;
 }
 
-h1, h2{
+header h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+  font-style: oblique;
+}
+
+h1, h2 {
   font-family: 'Roboto', sans-serif;
 }
 
-header img{
+header img {
   height: 2rem;
   margin-left: 2.5rem;
+}
+
+@media only screen and (min-width: 800px) {
+
+  header h1 {
+    font-size: 1.45rem;
+  }
+  header h2 {
+    font-size: 1.250rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+
+  header h1 {
+    font-size: 1.85rem;
+  }
+  header h2 {
+    font-size: 1.650rem;
+  }
 }
