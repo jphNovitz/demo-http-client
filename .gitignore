@@ -28,9 +28,7 @@ Php/vendor
 Php/env.json
 
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
+
 ###< symfony/phpunit-bridge ###
 
 ###> phpunit/phpunit ###
@@ -44,3 +42,4 @@ Php/env.json
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+/var/
