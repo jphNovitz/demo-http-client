@@ -9,13 +9,8 @@ use App\Exception\NotFoundException;
 use App\Exception\UnauthorizedException;
 use App\Exception\WrongDataTypeException;
 use App\Model\TwitterGetterInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use function PHPUnit\Framework\throwException;
-
 
 /**
  * Class TwitterGetter
@@ -29,27 +24,33 @@ use function PHPUnit\Framework\throwException;
 class TwitterGetter implements TwitterGetterInterface
 {
 
-    protected $client;
-    protected $bearer;
-    protected $screenName;
-    protected $count;
-
-    public function __construct(array $params = null)
+    public function __construct(
+        private HttpClientInterface $client,
+        private string              $screenName = '',
+        private string              $bearer = '',
+        private int                 $count = 0,
+    )
     {
-
-        if (null === $params) throw new \InvalidArgumentException('$params cannot be null or empty');
-
-        $this->client =  HttpClient::create();
-        $this->screenName = $params['screenName'];
-        $this->count = $params['count'];
-        $this->bearer = $params['bearer'];
+        $this->bearer = $_ENV['BEARER'];
+        $this->screenName = $_ENV['SCREEN_NAME'];
+        $this->count = $_ENV['COUNT'];
     }
 
+    /**
+     * @return string
+     * @throws BadRequestException
+     * @throws ForbiddenException
+     * @throws GeneralRequestException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
+     * @throws WrongDataTypeException
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     */
     public function getDatas()
     {
-
         try {
-
             $response = $this->client->request(
                 'GET',
                 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=' . $this->screenName . '&count=' . $this->count,
@@ -61,12 +62,10 @@ class TwitterGetter implements TwitterGetterInterface
 
             $this->validateRequestCode($response->getStatusCode());
 
-
             json_decode($response->getContent());
             if (json_last_error() === JSON_ERROR_NONE) return $response->getContent();
             throw  new WrongDataTypeException();
         } catch (TransportExceptionInterface $exception) {
-
             throw  new \LogicException('Invalid Credentials');
         }
     }
@@ -80,23 +79,21 @@ class TwitterGetter implements TwitterGetterInterface
      * @throws NotFoundException
      * @throws UnauthorizedException
      */
-    public function validateRequestCode($code)
+    public function validateRequestCode($code): bool
     {
-        switch (true):
-            case $code === 400:
-                throw  new BadRequestException();
-            case $code === 401:
-                throw  new UnauthorizedException();
-            case $code === 403:
-                throw  new ForbiddenException();
-            case $code === 404:
-                throw  new NotFoundException();
-            case ($code > 400) && ($code < 600) :
-                throw  new GeneralRequestException();
-            default:
+        switch ($code):
+            case 200:
                 return true;
+            case 400:
+                throw  new BadRequestException();
+            case 401:
+                throw  new UnauthorizedException();
+            case 403:
+                throw  new ForbiddenException();
+            case 404:
+                throw  new NotFoundException();
+            default:
+                throw  new GeneralRequestException();
         endswitch;
     }
-
-
 }

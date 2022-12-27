@@ -12,6 +12,7 @@ parameters:
 services:
     # default configuration for services in *this* file
     _defaults:
+        public: true
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
@@ -31,9 +32,13 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
-#    App\Service\TwitterGetter:
-#        arguments:
-#            $httpclient: '@http_client'
+    App\Service\TwitterGetter\:
+        resource: '../src/Service/TwitterGetter.php'
+        arguments:
+            - '@http_client'
+#    http-client:
+#        class: Symfony\Component\HttpClient\HttpClient
+#        arguments: [ '@http_client' ]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
