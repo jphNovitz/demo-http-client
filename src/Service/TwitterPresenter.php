@@ -4,6 +4,7 @@ namespace App\Service;
 
 
 use App\Model\TwitterPresenterInterface;
+use function PHPUnit\Framework\throwException;
 
 
 /**
@@ -20,7 +21,7 @@ class TwitterPresenter implements TwitterPresenterInterface
 
     public function prepareDatas($content)
     {
-        if (!$content) return null;
+        if (!$content) throw new \Exception('Content variable cannot be null');
 
         $tweets = [];
         $raw_tweets = json_decode($content);
@@ -53,7 +54,7 @@ class TwitterPresenter implements TwitterPresenterInterface
             array_push($tweets, $tweet);
 
         }
-//        dd($tweets);
+
         return $tweets;
     }
 
